@@ -57,3 +57,28 @@ column-gap: 10px;
 .invisible{
     display: none;
 }
+.transparent{
+    opacity: 0.6;
+}
+
+.winning{
+    animation: highlights 500ms forwards;
+}
+
+@keyframes highlights {
+    0% {background: yellow}
+    50% { background: green} 
+    100% {background: yellow}   
+}
+
+.losing{
+    animation: redhighlight 500ms forwards;
+}
+
+@keyframes redhighlight {
+    0% {background: yellow}
+    50% { background: red} 
+    100% {background: yellow}   
+}
+
+
