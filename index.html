@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='./styles.css'/>
+    <title>Videostop-OOP</title>
+</head>
+<body>
+    <div class="div container">
+        <h1>Videostop</h1>
+        <div id="score-wrapper">
+            <h2>Points <span id="score">0</span></h2>
+            <h2>Attempts <span id="loops">0</span></h2>
+            <h2>Lives <span id="attempts">3</span></h2>
+        </div>
+
+        <div class="display">
+            <div id="numbers-wrapper">
+                <div class="numbers"  id="number-one">0</div>
+                <div class="numbers"  id="number-two">0</div>
+                <div class="numbers"  id="number-three">0</div>
+            </div>  
+        </div>
+        <div class="buttons invisible" id="buttons-wrapper">
+            <button id="play-btn" class="visible">PLAY</button>
+            <button id="stop-btn" class="invisible">STOP</button>
+        </div>
+        <div id="new-game-wrapper"  class="buttons">
+            <button id="new-game">NEW GAME</button>
+        </div>
+    </div>
+    
+    <script type="module" defer src="./index.js"></script>
+</body>
+</html>
