@@ -47,13 +47,21 @@ export default class Game {
     }
 
     play(){
+        // this.hideShowButtons()
+        document.getElementById('stop-btn').classList.remove('invisible')
+        document.getElementById('stop-btn').classList.add('visible')
+        document.getElementById('play-btn').classList.add('invisible')
+        document.getElementById('play-btn').classList.remove('visible')
+
+        console.log('play this', this)
+
         if(this.isNewGame){
             this.reset()
             this.isNewGame = false
         }
-        if(this.attempts >= 0) this.gameOn = true
+        if(this.attempts >= 1) this.gameOn = true
         if(this.gameOn === true){
-            this.hideShowButtons()
+            
             this.loop()
             console.log(this.numOne, this.numTwo, this.numThree)
         }       
@@ -68,7 +76,7 @@ export default class Game {
     }
 
     reset(){
-        this.rounds = 1
+        this.rounds = 0
         this.speed = 1000
         this.numOne = 0
         this.numTwo = 0
@@ -76,13 +84,21 @@ export default class Game {
         this.score = 0
         this.attempts = 3
         this.gameOn = true
-        document.getElementById('attempts').innerHTML='3'
+        document.getElementById('attempts').innerText='3'
         
     }
 
     stop(){
+        document.getElementById('stop-btn').classList.add('invisible')
+        document.getElementById('stop-btn').classList.remove('visible')
+        document.getElementById('play-btn').classList.remove('invisible')
+        document.getElementById('play-btn').classList.add('visible')
+
+        console.log('this from stop',this)
 
         this.gameOn = false
+        this.rounds  = this.rounds + 1
+
         const digits = document.querySelectorAll('.numbers')
 
         //DISABLE PLAY BUTTON FOR 2 SECONDS
@@ -95,14 +111,12 @@ export default class Game {
         },2000)
 
         //ADD ONE TO THE ATTEMPTS
-        document.getElementById('loops').innerHTML = this.rounds ++
+        document.getElementById('loops').innerHTML = this.rounds 
 
         
-        this.hideShowButtons()
+        // this.hideShowButtons()
 
         console.log(this.numOne, this.numTwo, this.numThree)
-        
-        clearInterval(this.interval)
 
         if(this.numOne === this.numTwo && this.numTwo === this.numThree){
             const music = new Audio('./../music/notification.wav')
@@ -132,21 +146,29 @@ export default class Game {
             this.updateScore(this.score)
 
         }else{
-            this.attempts --
+            this.attempts = this.attempts - 1
 
             const music = new Audio('./../music/loss.mp3')
             music.play()
-
-            if(this.attempts < 0){
+            this.gameOn = false
+            if(this.attempts === 0){
                 const music = new Audio('./../music/gameover.mp3')
                 music.play()
+
                 this.gameOn = false
+                // this.attempts = 3
+                // this.score = 0
+                // this.rounds = 0
+                this.isNewGame = true
+                
                 document.getElementById('buttons-wrapper').classList.add('invisible')
-                document.getElementById('new-game-wrapper').classList.toggle('visible')
-                document.getElementById('new-game-wrapper').classList.toggle('invisible')
-                return
+                document.getElementById('new-game-wrapper').classList.add('visible')
+                document.getElementById('new-game-wrapper').classList.remove('invisible')
+                
+                
             } 
-            this.updateAttempts(this.attempts)    
+            this.updateAttempts(this.attempts) 
+               
         }
 
 
